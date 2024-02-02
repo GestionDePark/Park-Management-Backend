@@ -5,7 +5,7 @@ import { DocumentBuilder, OpenAPIObject, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
-    const config: Omit<OpenAPIObject, "paths"> = new DocumentBuilder()
+    const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
         .setTitle('GestionDePark')
         .setDescription('Manage your park easily')
         .setVersion('3.0.3')
