@@ -13,6 +13,9 @@ import { UserModule } from './user/user.module';
             ...configs().databaseConfig,
             autoLoadEntities: true,
             synchronize: true,
+            ssl: {
+                rejectUnauthorized: false
+            }
         }),
         UserModule,
     ],
