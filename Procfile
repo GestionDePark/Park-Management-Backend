@@ -1,1 +1,1 @@
-web: npm run start:prod
+web: npm install yarn -g && yarn install && npm build && npm run start:prod
