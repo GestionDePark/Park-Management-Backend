@@ -1,1 +1,5 @@
-export class CreateEmpolyeeDto {}
+export class CreateEmpolyeeDto {
+    joinedAt: Date | undefined;
+    userId: string;
+    jobId: string;
+}
