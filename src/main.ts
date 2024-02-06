@@ -5,8 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
-    app.enableCors({origin: "*"});
-    app.useGlobalPipes(new ValidationPipe());
+    app.enableCors({ origin: '*' });
 
     const config: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
         .setTitle('GestionDePark')
