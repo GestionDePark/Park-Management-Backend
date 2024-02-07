@@ -17,6 +17,7 @@ model User {
   email     String    @unique
   password  String
   isAdmin   Boolean   @default(false)
+  salary    Float     @default(10.0)
   Employee  Employee?
 }
 

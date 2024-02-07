@@ -14,20 +14,28 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthenticatedRequest } from '../utils/object.utils';
-import { AdminGuard } from '../auth/admin.guard';
 import { AuthGuard } from '../auth/auth.guard';
+import { AdminGuard } from '../auth/admin.guard';
+import { User } from '@prisma/client';
+import { ApiProperty, ApiTags } from '@nestjs/swagger';
 
 @Controller('user')
+@ApiTags('User')
 export class UserController {
     private readonly logger = new Logger(UserController.name);
     constructor(private readonly userService: UserService) {}
 
     @Post()
+    @ApiProperty({
+        description: 'Create an User ',
+    })
+    @UseGuards(AdminGuard)
     create(@Body() createUserDto: CreateUserDto) {
         return this.userService.create(createUserDto);
     }
 
     @Get()
+    @UseGuards(AuthGuard)
     findAll() {
         return this.userService.findAll();
     }
@@ -42,7 +50,11 @@ export class UserController {
     }
 
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    @UseGuards(AuthGuard)
+    update(
+        @Param('id') id: string,
+        @Body() updateUserDto: UpdateUserDto,
+    ): Promise<User> {
         return this.userService.update(id, updateUserDto);
     }
 
