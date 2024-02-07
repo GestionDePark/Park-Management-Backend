@@ -9,7 +9,7 @@ import { CryptoService } from './crypto/crypto.service';
 import { CryptoModule } from './crypto/crypto.module';
 import { JobModule } from './job/job.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { EmpolyeeModule } from './empolyee/empolyee.module';
+import { EmployeeModule } from './empolyee/employee.module';
 
 @Module({
     imports: [
@@ -21,7 +21,7 @@ import { EmpolyeeModule } from './empolyee/empolyee.module';
         CryptoModule,
         JobModule,
         PrismaModule,
-        EmpolyeeModule,
+        EmployeeModule,
     ],
     controllers: [AppController],
     providers: [AppService, PrismaService, CryptoService],

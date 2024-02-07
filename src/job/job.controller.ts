@@ -13,9 +13,11 @@ import { CreateJobDto } from './dto/create-job.dto';
 import { UpdateJobDto } from './dto/update-job.dto';
 import { AdminGuard } from '../auth/admin.guard';
 import { Job } from '@prisma/client';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('job')
 @UseGuards(AdminGuard)
+@ApiTags('Job')
 export class JobController {
     constructor(private readonly jobService: JobService) {}
 
