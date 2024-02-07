@@ -23,7 +23,10 @@ export class EmployeeController {
     @Post()
     @UseGuards(AdminGuard)
     create(@Body() createEmpolyeeDto: CreateEmpolyeeDto) {
-        return this.empolyeeService.create(createEmpolyeeDto);
+        return this.empolyeeService.create({
+            ...createEmpolyeeDto,
+            salary: +createEmpolyeeDto.salary,
+        });
     }
 
     @Get()

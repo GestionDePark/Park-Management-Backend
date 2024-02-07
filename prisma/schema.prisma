@@ -17,13 +17,13 @@ model User {
   email     String    @unique
   password  String
   isAdmin   Boolean   @default(false)
-  salary    Float     @default(10.0)
   Employee  Employee?
 }
 
 model Employee {
   id       String   @id @default(uuid())
   joinedAt DateTime @default(now())
+  salary   Float    @default(10.0)
   user     User     @relation(fields: [userId], references: [id])
   userId   String   @unique
   job      Job      @relation(fields: [jobId], references: [id])

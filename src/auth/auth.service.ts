@@ -22,6 +22,9 @@ export class AuthService {
 
     async signIn(email: string, password: string): Promise<{ token: string }> {
         const user = await this.userService.findByEmail(email);
+        if (!user) {
+            throw new UnauthorizedException();
+        }
         this.logger.log(`User queried: ${user.id}`);
         const isMatch = await this.cryptoService.isMatch(
             password,
