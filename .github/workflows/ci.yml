@@ -1,0 +1,22 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+env:
+  DATABASE_URL: ${{ secrets.DATABASE_URL }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+      - name: init yarn
+        run: npm install yarn -g
+      - name: Install dependencies
+        run: yarn
+      - run: yarn build
+      - name: Apply all pending migrations to the database
+        run: npx prisma migrate deploy
