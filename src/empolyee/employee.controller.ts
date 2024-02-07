@@ -8,14 +8,17 @@ import {
     Delete,
     UseGuards,
 } from '@nestjs/common';
-import { EmpolyeeService } from './empolyee.service';
+import { EmployeeService } from './employee.service';
 import { CreateEmpolyeeDto } from './dto/create-empolyee.dto';
 import { UpdateEmpolyeeDto } from './dto/update-empolyee.dto';
 import { AdminGuard } from '../auth/admin.guard';
+import { AuthGuard } from '../auth/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('empolyee')
-export class EmpolyeeController {
-    constructor(private readonly empolyeeService: EmpolyeeService) {}
+@Controller('employee')
+@ApiTags('Employee')
+export class EmployeeController {
+    constructor(private readonly empolyeeService: EmployeeService) {}
 
     @Post()
     @UseGuards(AdminGuard)
@@ -24,6 +27,7 @@ export class EmpolyeeController {
     }
 
     @Get()
+    @UseGuards(AuthGuard)
     findAll() {
         return this.empolyeeService.findAll();
     }
@@ -42,6 +46,7 @@ export class EmpolyeeController {
         return this.empolyeeService.update(id, updateEmpolyeeDto);
     }
 
+    @UseGuards(AdminGuard)
     @Delete(':id')
     remove(@Param('id') id: string) {
         return this.empolyeeService.remove(id);
