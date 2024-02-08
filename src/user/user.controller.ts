@@ -49,6 +49,14 @@ export class UserController {
         return this.userService.findOne(request.user.sub);
     }
 
+    @UseGuards(AdminGuard)
+    @Get(':id')
+    findById(
+      @Param('id') id: string
+    ) {
+        return this.userService.findOne(id);
+    }
+
     @Patch(':id')
     @UseGuards(AuthGuard)
     update(
