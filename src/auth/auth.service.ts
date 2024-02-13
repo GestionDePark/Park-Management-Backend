@@ -65,6 +65,9 @@ export class AuthService {
 
     async isAdmin(request: AuthenticatedRequest) {
         const user = await this.userService.findOne(request.user.sub);
+        if (!user) {
+            throw new UnauthorizedException();
+        }
         return user.isAdmin;
     }
 
