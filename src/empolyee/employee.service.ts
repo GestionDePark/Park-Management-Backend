@@ -13,13 +13,40 @@ export class EmployeeService {
         });
     }
     async findAll(): Promise<Employee[]> {
-        return this.prismaService.employee.findMany();
+        return this.prismaService.employee.findMany({
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        isAdmin: true,
+                        password: false,
+                        Employee: false,
+                        email: false,
+                        firstName: true,
+                        lastName: true,
+                    },
+                },
+            },
+        });
     }
 
     async findOne(id: string) {
         return this.prismaService.employee.findUnique({
             where: {
                 id: id,
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        isAdmin: true,
+                        password: false,
+                        Employee: false,
+                        email: false,
+                        firstName: true,
+                        lastName: true,
+                    },
+                },
             },
         });
     }
