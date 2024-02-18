@@ -10,6 +10,7 @@ import { CryptoModule } from './crypto/crypto.module';
 import { JobModule } from './job/job.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { EmployeeModule } from './empolyee/employee.module';
+import { TransactionModule } from './transaction/transaction.module';
 
 @Module({
     imports: [
@@ -22,6 +23,7 @@ import { EmployeeModule } from './empolyee/employee.module';
         JobModule,
         PrismaModule,
         EmployeeModule,
+        TransactionModule,
     ],
     controllers: [AppController],
     providers: [AppService, PrismaService, CryptoService],

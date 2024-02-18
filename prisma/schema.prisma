@@ -21,17 +21,38 @@ model User {
 }
 
 model Employee {
-  id       String   @id @default(uuid())
-  joinedAt DateTime @default(now())
-  salary   Float    @default(10.0)
-  user     User     @relation(fields: [userId], references: [id])
-  userId   String   @unique
-  job      Job      @relation(fields: [jobId], references: [id])
-  jobId    String
+  id          String        @id @default(uuid())
+  joinedAt    DateTime      @default(now())
+  salary      Float         @default(10.0)
+  user        User          @relation(fields: [userId], references: [id])
+  userId      String        @unique
+  job         Job           @relation(fields: [jobId], references: [id])
+  jobId       String
+  Transaction Transaction[]
 }
 
 model Job {
   id       String     @id @default(uuid())
   name     String
   Employee Employee[]
+}
+
+model Transaction {
+  id       String          @id @default(uuid())
+  reason   String
+  type     TransactionType @default(INCOME)
+  amount   Float
+  sourceId String
+  source   Employee        @relation(fields: [sourceId], references: [id])
+}
+
+enum TransactionType {
+  OUTCOME
+  INCOME
+}
+
+model Balance {
+  id     String   @id @default(uuid())
+  amount Float
+  time   DateTime @default(now())
 }
