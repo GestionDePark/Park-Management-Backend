@@ -17,6 +17,11 @@ export class TransactionController {
     return this.transactionService.findAll();
   }
 
+  @Get('balance')
+  balance() {
+    return this.transactionService.balance();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.transactionService.findOne(id);
@@ -30,10 +35,5 @@ export class TransactionController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.transactionService.remove(id);
-  }
-
-  @Get('balance')
-  balance() {
-    return this.transactionService.balance();
   }
 }
